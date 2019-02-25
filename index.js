@@ -37,7 +37,7 @@ app.post('/', function (req, res) {
         res.render('response',{emotion: emotion,score: totalScoreValue,tweet: tweet, color: color});
   })})
 
-const port = 5000;
+const port=process.env.PORT || 3000;
 
 app.listen(port, () => {
      console.log(`Listening to the app on port ${port}`)
