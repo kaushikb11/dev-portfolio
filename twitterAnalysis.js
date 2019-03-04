@@ -1,10 +1,10 @@
-var twitterAnalysis = function() {
+const twitterAnalysis = function() {
     const async = require('async');
     const twitter = require('twitter');
     const dotenv = require('dotenv');
     const Sentiment = require('sentiment');
-    var sentiment = new Sentiment();
-    dotenv.config();
+    const sentiment = new Sentiment();
+    dotenv.config('./env');
 
     const twitterApi = new twitter({
         consumer_key: "YtCwPnwYEEwswx4UTRv5sRHBN",
@@ -24,14 +24,24 @@ var twitterAnalysis = function() {
             this.totalscore = totalScore;
         } )
     }
+
+    this.getTrendingHashtags = function(callback) {
+        twitterApi.get("trends/place", {id: 23424848}, function(error, trends, response) {
+            if (error) callback(error);
+            const trendsTopics = []
+            async.each(trends[0].trends, function(item, callEach) { 
+                trendsTopics.push(item.name)
+                callEach();
+            }, function() {
+                callback(null, trendsTopics)
+        })
+    })}
+
     this.getTwitterHashTagData = function (query, callback) {
-        var dataScore = {"Very Negative": 0, "Negative": 0, "Neutral": 0, "Positive": 0, "Very Positive": 0};
-        var sum = 0;
 
         twitterApi.get("search/tweets", {q: "#" + query, lang: "en"}, function (error, tweets, response) {
-            var twitterData = [];
-            var sortedTwitterData = [];
-            var totalScore = [];
+            const twitterData = [];
+            const totalScore = [];
             if (error) callback(error);
 
             async.each(tweets.statuses, function (item, callEach) {
@@ -49,6 +59,5 @@ var twitterAnalysis = function() {
         });
     };
 }
-
 
 module.exports = twitterAnalysis;
