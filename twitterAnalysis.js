@@ -7,10 +7,10 @@ const twitterAnalysis = function() {
     dotenv.config();
 
     const twitterApi = new twitter({
-        consumer_key: process.env.consumer_key,
-        consumer_secret: process.env.consumer_secret,
-        access_token_key: process.env.access_token_key,
-        access_token_secret: process.env.access_token_secret
+        consumer_key: "YtCwPnwYEEwswx4UTRv5sRHBN",
+        consumer_secret: "eoQ3rw9jJLHQ69jKvbLMuc3eSMCiYTZZrXzXMV2EvMQV48KrYZ",
+        access_token_key: "983774988007297024-xo2ZkoDSq6Kl4iaeQg6MmJk43JRF2yB",
+        access_token_secret: "ff73Zswa8l4N5CyRo7YXov61VIG04DoiB6f1gwQkI8ga9"
     });
 
     const totalScore = [];
