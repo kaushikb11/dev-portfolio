@@ -2,12 +2,12 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser');
 const twitterAnalysisInstance = require("./twitterAnalysis.js");
-
+const cors = require('cors')
 const twitter = new twitterAnalysisInstance();
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
-
+app.use(cors());
 app.set('view engine', 'ejs');
 
 app.get('/trends', function(req, res) {
